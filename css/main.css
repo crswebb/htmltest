@@ -8,6 +8,9 @@
   --music-background: url("../img/music.jpg");
   --contact-background: url("../img/contact.jpg");
 }
+* {
+  box-sizing: border-box;
+}
 html {
   scroll-behavior: smooth !important;
 }
@@ -20,11 +23,12 @@ body {
   padding: 0;
   color: var(--text-color);
   background-color: var(--background-color);
-  overflow: hidden;
+  overflow-x: visible;
 }
 header,
 footer {
   flex-shrink: 0;
+  min-height: 3rem; /* Adjust based on your design needs */
 }
 header {
   background-color: var(--primary-color);
@@ -85,6 +89,7 @@ section {
     div.wrapper {
       max-width: 100%;
       width: 100%;
+      margin: 0 auto;
       &:hover {
         background-color: var(--semi-transparent-background);
       }
@@ -105,13 +110,17 @@ section {
   }
   &#contact {
     background-image: var(--contact-background);
+    div.wrapper {
+      padding: 3rem 5rem;
+      min-height: 35vh;
+    }
   }
   div.wrapper {
     transition: all 0.3s ease;
     background-color: var(--semi-transparent-background);
     padding: 1rem;
     border-radius: 0.5rem;
-    margin: 45vh auto;
+    margin: 35vh auto;
     max-width: 500px;
     &:hover {
       background-color: var(--background-color);
@@ -133,13 +142,66 @@ footer {
   }
 }
 @media (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr;
+  .hamburger-menu {
+    display: block; /* Show hamburger menu icon */
+    cursor: pointer;
+    position: absolute;
+    right: 1rem; /* Adjust this value if necessary */
+    top: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    z-index: 1000; /* Ensure it's above other content */
   }
+  nav {
+    display: none; /* Hide the default nav on mobile */
+    &.active {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 3rem; /* Adjust based on actual header height */
+      left: 0;
+      background-color: var(--primary-color);
+      width: 100%;
+      padding: 1rem;
+      a {
+        font-size: 1.2em;
+        padding: 0.5rem 0;
+      }
+    }
+  }
+  /* When the hamburger menu is active, display the nav items vertically */
   section {
-    flex-grow: 1; /* Allows section to fill available space */
+    &#home div.wrapper {
+      margin: 25vh auto; /* Adjust content vertical positioning */
+    }
+    &#music div.wrapper {
+      margin: 0vh auto; /* Adjust content vertical positioning */
+    }
+  }
+  div.music article.song {
+    transform: none; /* Disable hover effect that might not work well on touch devices */
   }
   h2 {
     font-size: 1.2em;
+  }
+  p,
+  a,
+  li {
+    font-size: 0.9em; /* Adjust text size for readability */
+  }
+  .wrapper {
+    margin: 20vh auto; /* Adjust content vertical positioning */
+    padding: 1rem; /* Consistent padding */
+  }
+  img {
+    width: 100%; /* Ensure images are not larger than the screen */
+    height: auto; /* Maintain aspect ratio */
+  }
+}
+
+/* Styles for larger screens */
+@media (min-width: 769px) {
+  .hamburger-menu {
+    display: none; /* Hide hamburger menu icon on larger screens */
   }
 }

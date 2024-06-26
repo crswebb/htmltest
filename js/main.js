@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('nav');
+
+    hamburgerMenu.addEventListener('click', function () {
+        nav.classList.toggle('active');
+    });
+
     const navLinks = document.querySelectorAll('nav a[href^="#"]');
     navLinks.forEach(link => {
         link.addEventListener('click', function (e) {
@@ -11,6 +18,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     behavior: 'smooth'
                 });
             }
+            // Close the mobile menu when a link is clicked
+            nav.classList.remove('active');
         });
     });
 
